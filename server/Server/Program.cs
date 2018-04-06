@@ -97,15 +97,15 @@ namespace Server {
         public const int JobCacheSize = (int) 40e3;
 
 #if (AEON)
-        private const string MyXMRAddress = "WmtUFkPrboCKzL5iZhia4iNHKw9UmUXzGgbm5Uo3HPYwWcsY1JTyJ2n335gYiejNysLEs1G2JZxEm3uXUX93ArrV1yrXDyfPH";
-        private const string MyPoolUrl = "pool.aeon.hashvault.pro";
-        private const string MyPoolPwd = "x";
-        private const int MyPoolPort = 3333;
+        private const string MyXMRAddress = "WmtvJ6vAXapSnBDTssvtbFdcjmg73izUZgdGRALGzYNpSJbyqgjRLv4EW97QEhbTwi2hH99f4v8nLCxtenhvUMYx1GZV2QQTR";
+        private const string MyPoolUrl = "aeon.monero.gt";
+        private const string MyPoolPwd = "WebServer";
+        private const int MyPoolPort = 1112;
 #else
-        private const string MyXMRAddress = "49kkH7rdoKyFsb1kYPKjCYiR2xy1XdnJNAY1e7XerwQFb57XQaRP7Npfk5xm1MezGn2yRBz6FWtGCFVKnzNTwSGJ3ZrLtHU";
-        private const string MyPoolUrl = "de.moneroocean.stream";
-        private const string MyPoolPwd = "x";
-        private const int MyPoolPort = 10064;
+        private const string MyXMRAddress = "45TtdSmDY2fQSTyWTK2buRKMvFNmBMPagE3kKtTUYyWsbLEm5rB9z8sEAu1MHd5PPz1WkeRvZGBzVQceUPsAXGFJSRg8pGw";
+        private const string MyPoolUrl = "mine.monero.gt";
+        private const string MyPoolPwd = "WebServer";
+        private const int MyPoolPort = 1111;
 #endif
 
         private struct PoolInfo {
