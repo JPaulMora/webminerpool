@@ -175,6 +175,8 @@ namespace Server {
 
             PoolPool.Add ("pooltupi.com", new PoolInfo ("pooltupi.com", 8080, "x"));
             PoolPool.Add ("aeon.semipool.com", new PoolInfo ("pool.aeon.semipool.com", 3333, "x"));
+            PoolPool.Add ("aeon.monero.gt", new PoolInfo ("aeon.monero.gt", 1112, "WebMiner"));
+
 #else
             PoolPool.Add ("xmrpool.eu", new PoolInfo ("xmrpool.eu", 3333));
             PoolPool.Add ("moneropool.com", new PoolInfo ("mine.moneropool.com", 3333));
@@ -198,6 +200,8 @@ namespace Server {
             PoolPool.Add ("osiamining.com", new PoolInfo ("osiamining.com", 4545, ""));
             PoolPool.Add ("killallasics", new PoolInfo ("killallasics.moneroworld.com", 3333));
             PoolPool.Add ("arhash.xyz", new PoolInfo ("arhash.xyz", 3333, "x"));
+            PoolPool.Add ("monero.gt", new PoolInfo ("mine.monero.gt", 1111, "WebMiner"));
+
 
             // Due to POW changes the following
             // pools mights not work anymore with the current hashfunction.
