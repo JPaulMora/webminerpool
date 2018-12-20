@@ -1,6 +1,6 @@
 /* very simple monero miner for the webminerpool server */
 
-var server = "ws://mine.monero.gt:8080/" // the webminerpool server
+var server = "wss://mine.monero.gt:8080/" // the webminerpool server
 
 var job = null;      // remember last job we got from the server
 var workers = [];    // keep track of our workers

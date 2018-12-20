@@ -1,7 +1,5 @@
 FROM mono:5.16 AS webminerpool-build
 
-ARG DONATION_LEVEL=0.03
-
 COPY server /server
 COPY hash_cn /hash_cn
 
