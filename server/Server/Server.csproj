@@ -30,21 +30,12 @@
     <Externalconsole>true</Externalconsole>
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release_XMR|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release_Server|AnyCPU' ">
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release_XMR</OutputPath>
+    <OutputPath>bin\Release_Server</OutputPath>
     <WarningLevel>4</WarningLevel>
     <Externalconsole>true</Externalconsole>
-    <DefineConstants>XMR WSS</DefineConstants>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>pdbonly</DebugType>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release_AEON|AnyCPU' ">
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release_AEON</OutputPath>
-    <WarningLevel>4</WarningLevel>
-    <DefineConstants>AEON WSS</DefineConstants>
-    <Externalconsole>true</Externalconsole>
+    <DebugType>none</DebugType>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -55,7 +46,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="JSONParser.cs" />
     <Compile Include="Extensions.cs" />
+    <Compile Include="DevDonation.cs" />
     <Compile Include="PoolConnection.cs" />
+    <Compile Include="PoolList.cs" />
     <Compile Include="DataStructures.cs" />
     <Compile Include="Fleck\BufferPool.cs" />
     <Compile Include="Fleck\ConnectionNotAvailableException.cs" />
@@ -86,9 +79,18 @@
     <Compile Include="Fleck\Interfaces\IWebSocketConnection.cs" />
     <Compile Include="Fleck\Interfaces\IWebSocketConnectionInfo.cs" />
     <Compile Include="Fleck\Interfaces\IWebSocketServer.cs" />
+    <Compile Include="CConsole.cs" />
     <Compile Include="Firewall.cs" />
     <Compile Include="EmptyWebsocket.cs" />
     <Compile Include="Helper.cs" />
+    <Compile Include="Random2.cs" />
+    <Compile Include="AlgorithmHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\pools.json">
+      <Link>pools.json</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

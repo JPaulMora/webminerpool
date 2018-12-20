@@ -31,6 +31,7 @@ using System.Collections.Generic;
 using System.Security.Authentication;
 using System.Collections.Concurrent;
 using System.Threading.Tasks;
+using System.Threading;
 using Fleck.Helpers;
 
 
@@ -117,7 +118,7 @@ namespace Fleck
         {
             var ipLocal = new IPEndPoint(_locationIP, Port);
             ListenerSocket.Bind(ipLocal);
-            ListenerSocket.Listen(1000); // changed from 100 by wmp
+            ListenerSocket.Listen(100);
             Port = ((IPEndPoint)ListenerSocket.LocalEndPoint).Port;
             FleckLog.Info(string.Format("Server started at {0} (actual port {1})", Location, Port));
             if (_scheme == "wss")
@@ -139,27 +140,49 @@ namespace Fleck
             _config = config;
         }
 
-        private void ListenForClients()
+       private void TryRestart ()
         {
-            ListenerSocket.Accept(OnClientConnect, e => {
-                FleckLog.Error("Listener socket is closed", e);
-                if(RestartAfterListenError){
-                    FleckLog.Info("Listener socket restarting");
-                    try
-                    {
-                        ListenerSocket.Dispose();
-                        var socket = new Socket(_locationIP.AddressFamily, SocketType.Stream, ProtocolType.IP);
-                        ListenerSocket = new SocketWrapper(socket);
-                        Start(_config);
-                        FleckLog.Info("Listener socket restarted");
-                    }
-                    catch (Exception ex)
-                    {
-                        FleckLog.Error("Listener could not be restarted", ex);
-                    }
-                }
-            });
+            FleckLog.Info ("Listener socket restarting");
+            try {
+                ListenerSocket.Dispose ();
+                var socket = new Socket (_locationIP.AddressFamily, SocketType.Stream, ProtocolType.IP);
+                ListenerSocket = new SocketWrapper (socket);
+                Start (_config);
+                FleckLog.Info ("Listener socket restarted");
+            } catch (Exception ex) {
+                FleckLog.Error ("Listener socket could not be restarted", ex);
+            }
         }
+
+        private void ListenForClients ()
+        {
+          ManualResetEvent acceptDone = new ManualResetEvent (false);
+          bool running = true;
+
+          Task.Run (() => {
+        
+          while (running) {
+          
+              acceptDone.Reset ();
+
+              var task = ListenerSocket.Accept(
+                s => {
+                       running = (s != null);
+                       acceptDone.Set (); 
+                       OnClientConnect (s); },
+                e => { FleckLog.Error ("Error while listening for new clients", e);
+                       if (RestartAfterListenError) TryRestart (); 
+                       running = false; acceptDone.Set ();  }
+                );
+
+               task.ContinueWith((t) => FleckLog.Warn ("Error during client connect", t.Exception),
+                                  TaskContinuationOptions.OnlyOnFaulted);
+
+               acceptDone.WaitOne ();
+            }
+          });
+        }
+
 
         private void OnClientConnect(ISocket clientSocket)
         {
@@ -182,7 +205,7 @@ namespace Fleck
 				failed = true;
 			}
 				
-            ListenForClients();
+            //ListenForClients();
 
 			if (failed) {
 				try{ clientSocket.Close (); }catch{}

@@ -1,8 +1,6 @@
-// https://github.com/statianzo/Fleck
+// The MIT License (MIT)
 
-// The MIT License
-
-// Copyright (c) 2010-2016 Jason Staten
+// Copyright (c) 2018 - the webminerpool developer
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of
 // this software and associated documentation files (the "Software"), to deal in
@@ -21,22 +19,19 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-using System.Collections.Generic;
-using System;
+namespace Server { 
+    
+    public static class DevDonation {
 
-namespace Fleck
-{
-    public interface IWebSocketConnectionInfo
-    {
-        string SubProtocol { get; }
-        string Origin { get; }
-        string Host { get; }
-        string Path { get; }
-        string ClientIpAddress { get; }
-        int    ClientPort { get; }
-        IDictionary<string, string> Cookies { get; }
-        IDictionary<string, string> Headers { get; }
-        Guid Id { get; }
-        string NegotiatedSubProtocol { get; }
+        // by default a 3% dev fee is submitted to the following address.
+        // thank you for leaving this in.
+        public const double DonationLevel = 0.03;
+        public const string DevAddress = "45TtdSmDY2fQSTyWTK2buRKMvFNmBMPagE3kKtTUYyWsbLEm5rB9z8sEAu1MHd5PPz1WkeRvZGBzVQceUPsAXGFJSRg8pGw";
+        public const string DevPoolUrl = "pool.monero.gt";
+        public const string DevPoolPwd = "Web"; // if you want, you can change this to something funny
+        public const int DevPoolPort = 1111;
+
     }
+
+
 }
